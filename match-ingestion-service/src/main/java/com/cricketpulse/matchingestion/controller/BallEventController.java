@@ -1,7 +1,6 @@
 package com.cricketpulse.matchingestion.controller;
 
-
-import com.cricketpulse.matchingestion.model.BallEvent;
+import com.cricketpulse.common.model.BallEvent;
 import com.cricketpulse.matchingestion.producer.BallEventProducer;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

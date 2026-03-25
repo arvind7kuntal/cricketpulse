@@ -1,6 +1,6 @@
 package com.cricketpulse.matchingestion.producer;
 
-import com.cricketpulse.matchingestion.model.BallEvent;
+import com.cricketpulse.common.model.BallEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
