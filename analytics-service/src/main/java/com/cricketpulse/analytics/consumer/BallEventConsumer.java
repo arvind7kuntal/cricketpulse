@@ -1,5 +1,6 @@
 package com.cricketpulse.analytics.consumer;
 
+import com.cricketpulse.analytics.service.PressureIndexService;
 import com.cricketpulse.common.model.BallEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class BallEventConsumer {
+    private final PressureIndexService pressureIndexService;
 
     @KafkaListener(
             topics="ball-events",
@@ -26,5 +28,13 @@ public class BallEventConsumer {
             ballEvent.getRunsScored(),
             ballEvent.getBowlerName(),
             ballEvent.getBatsmanName());
+
+        double pressureIndex= pressureIndexService.calculatePressureIndex(ballEvent);
+
+        log.info("PRESSURE INDEX for {} at Over {}.{} → {}",
+                ballEvent.getBatsmanName(),
+                ballEvent.getOverNumber(),
+                ballEvent.getBallNumber(),
+                pressureIndex);
     }
 }
