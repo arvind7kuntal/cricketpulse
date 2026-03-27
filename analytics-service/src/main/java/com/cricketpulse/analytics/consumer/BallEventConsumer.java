@@ -1,5 +1,6 @@
 package com.cricketpulse.analytics.consumer;
 
+import com.cricketpulse.analytics.service.OverPredictionService;
 import com.cricketpulse.analytics.service.PressureIndexService;
 import com.cricketpulse.common.model.BallEvent;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BallEventConsumer {
     private final PressureIndexService pressureIndexService;
+    private final OverPredictionService overPredictionService;
 
     @KafkaListener(
             topics="ball-events",
@@ -36,5 +38,12 @@ public class BallEventConsumer {
                 ballEvent.getOverNumber(),
                 ballEvent.getBallNumber(),
                 pressureIndex);
+
+        OverPredictionService.OverPrediction prediction =
+                overPredictionService.predictNextOver(ballEvent);
+        log.info("NEXT OVER PREDICTION → {} runs | Range: {} | Wicket probability: {}%",
+                Math.round(prediction.predictedRuns()),
+                prediction.runRange(),
+                Math.round(prediction.wicketProbability()));
     }
 }
