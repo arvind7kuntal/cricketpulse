@@ -1,5 +1,6 @@
 package com.cricketpulse.analytics.consumer;
 
+import com.cricketpulse.analytics.service.MomentumShiftService;
 import com.cricketpulse.analytics.service.OverPredictionService;
 import com.cricketpulse.analytics.service.PressureIndexService;
 import com.cricketpulse.common.model.BallEvent;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class BallEventConsumer {
     private final PressureIndexService pressureIndexService;
     private final OverPredictionService overPredictionService;
+    private final MomentumShiftService momentumShiftService;
 
     @KafkaListener(
             topics="ball-events",
@@ -45,5 +47,13 @@ public class BallEventConsumer {
                 Math.round(prediction.predictedRuns()),
                 prediction.runRange(),
                 Math.round(prediction.wicketProbability()));
+
+        // Momentum Shift
+        MomentumShiftService.MomentumResult momentum =
+                momentumShiftService.detectMomentum(ballEvent);
+        log.info("MOMENTUM → {} | Score: {} | {}",
+                momentum.momentum(),
+                Math.round(momentum.score()),
+                momentum.reason());
     }
 }
