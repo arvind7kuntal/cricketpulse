@@ -1,0 +1,196 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0a0a0a;
+  color: #e0e0e0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 12px;
+  color: #888;
+}
+
+.loading h2 {
+  font-size: 28px;
+  color: #4ade80;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.header h1 {
+  font-size: 22px;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.status.live {
+  background: #14532d;
+  color: #4ade80;
+}
+
+.status.offline {
+  background: #450a0a;
+  color: #f87171;
+}
+
+.match-info {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border: 1px solid #2a2a2a;
+}
+
+.match-title {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.over-info {
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.players {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.metric-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid #2a2a2a;
+}
+
+.metric-label {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.metric-sub {
+  font-size: 11px;
+  color: #666;
+}
+
+.pressure .metric-value { color: #f87171; }
+.prediction .metric-value { color: #a78bfa; }
+.wicket .metric-value { color: #facc15; }
+.momentum .metric-value { color: #4ade80; font-size: 16px; margin-top: 6px; }
+
+.ball-history {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid #2a2a2a;
+}
+
+.ball-history h3 {
+  font-size: 13px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.ball-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #222;
+  font-size: 12px;
+}
+
+.ball-row:last-child { border-bottom: none; }
+
+.ball-over {
+  color: #666;
+  min-width: 55px;
+}
+
+.ball-players {
+  flex: 1;
+  color: #aaa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ball-pressure {
+  color: #f87171;
+  min-width: 40px;
+  text-align: right;
+}
+
+.ball-momentum {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 55px;
+  text-align: center;
+}
+
+.ball-momentum.batting {
+  background: #14532d;
+  color: #4ade80;
+}
+
+.ball-momentum.bowling {
+  background: #450a0a;
+  color: #f87171;
+}
+
+.ball-momentum.neutral {
+  background: #1e293b;
+  color: #94a3b8;
+}
