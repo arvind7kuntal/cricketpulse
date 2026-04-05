@@ -1,10 +1,7 @@
 package com.cricketpulse.analytics.consumer;
 
 import com.cricketpulse.analytics.model.MatchAnalytics;
-import com.cricketpulse.analytics.service.AnalyticsStore;
-import com.cricketpulse.analytics.service.MomentumShiftService;
-import com.cricketpulse.analytics.service.OverPredictionService;
-import com.cricketpulse.analytics.service.PressureIndexService;
+import com.cricketpulse.analytics.service.*;
 import com.cricketpulse.common.model.BallEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +19,7 @@ public class BallEventConsumer {
     private final OverPredictionService overPredictionService;
     private final MomentumShiftService momentumShiftService;
     private final AnalyticsStore analyticsStore;
-
+    private final WebSocketPublisher webSocketPublisher;
     @KafkaListener(
             topics = "ball-events",
             groupId = "analytics-group"
@@ -63,6 +60,14 @@ public class BallEventConsumer {
         analyticsStore.save(analytics);
 
         log.info("Analytics saved | Match: {} | Pressure: {} | Next over: {} | Momentum: {}",
+                ballEvent.getMatchId(),
+                pressureIndex,
+                prediction.runRange(),
+                momentum.momentum());
+
+        webSocketPublisher.publishMatchUpdate(analytics);
+
+        log.info("Analytics saved + WebSocket pushed | Match: {} | Pressure: {} | Next over: {} | Momentum: {}",
                 ballEvent.getMatchId(),
                 pressureIndex,
                 prediction.runRange(),
